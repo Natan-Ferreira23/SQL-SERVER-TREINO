@@ -20,7 +20,7 @@ Este repositório contém diversos exercícios práticos desenvolvidos para trei
 
 - **SQL Server Management Studio (SSMS)**
 - **SQL Server 2019/2022**
-- Banco de dados de exemplo: `AdventureWorks2022`
+- Banco de dados de exemplo: `EMPRESA_DB`
 
 ## 🚀 Como Utilizar
 
