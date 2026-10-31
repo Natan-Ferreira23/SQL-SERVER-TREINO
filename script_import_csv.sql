@@ -1,19 +1,17 @@
 
+
+/*
+    @natan
+    30/10/2026
+    Descrição: Neste script realizei a importação de um arquivo csv onde possuia informacoes de codigo e endereço,
+    essas informações foram inseridas em uma tabela intermediaria e após isso foram utilizadas para alterar dados com update na
+    tabela de cadastro de produtos do ERP Protheus (tabela SB1)
+*/
+
 ------fazer backup
 SELECT *
   INTO SB1010_BKP_20261030
   FROM TOTVS_3DJ.dbo.SB1010;
-
--- ENCONTRANDO A DIFERENCA ENTRE O QUE ESTA NA PRODUTOS E NAO ESTA NA SB1
-SELECT 
-  p.ID,
-  p.Descricao,
-  p.Endereco
-FROM PRODUTO.dbo.Produtos p
-LEFT JOIN TOTVS_3DJ.dbo.SB1010 SB1 
-       ON SB1.B1_COD = p.ID
-      AND SB1.D_E_L_E_T_ = ' '
-WHERE SB1.B1_COD IS NULL;
 
 
 --- 1)  cria um banco de dados para criarmos uma tabela espelho
@@ -52,7 +50,18 @@ INNER JOIN PRODUTO.dbo.Produtos P ON P.ID=SB1.B1_COD
 WHERE 
   SB1.D_E_L_E_T_=''
 
--- 5) Excluindo a tabela criada para receber dados do csv
+-- ENCONTRANDO A DIFERENCA ENTRE O QUE ESTA NA PRODUTOS E NAO ESTA NA SB1
+SELECT 
+  p.ID,
+  p.Descricao,
+  p.Endereco
+FROM PRODUTO.dbo.Produtos p
+LEFT JOIN TOTVS_3DJ.dbo.SB1010 SB1 
+       ON SB1.B1_COD = p.ID
+      AND SB1.D_E_L_E_T_ = ' '
+WHERE SB1.B1_COD IS NULL;
+
+-- 5) Excluindo a tabela criada para receber dados do csv (opcional)
 DROP DATABASE PRODUTO 
 
 
